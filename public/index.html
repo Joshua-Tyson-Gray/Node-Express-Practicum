@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Student Log</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="crest.svg" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-500 text-white text-lg font-sans">
+    <form id="addLogForm" class="w-3/4 mx-auto mt-12 max-w-xl">
+      <h1 class="uppercase text-3xl font-bold tracking-widest pb-4">
+        Student Logs
+      </h1>
+      <div class="border-y-2">
+        <select
+          aria-label="Select Course"
+          id="course"
+          name="course"
+          data-cy="course_select"
+          class="
+            bg-slate-500
+            w-full
+            py-4
+            uppercase
+            tracking-widest
+            focus:outline-0
+            text-lg
+          "
+        ></select>
+        <br />
+      </div>
+      <!--Added uvuIdWrapper for easy hidding and showing-->
+      <div id="uvuIdWrapper" class="border-b-2 py-4">
+        <label for="uvuId" class="pr-4 pl-1">UVU ID</label><br />
+        <input
+          type="text"
+          id="uvuId"
+          name="uvuId"
+          data-cy="uvuId_input"
+          class="bg-slate-500 focus:outline-0 font-sans tracking-wider"
+        />
+      </div>
+      <!-- Corrected Spelling from Studnet to Student-->
+      <div id="logWrapper" class="my-12">
+        <h3
+          id="uvuIdDisplay"
+          data-cy="uvuIdDisplay"
+          class="text-1xl uppercase tracking-widest font-semibold"
+        >
+          Student Logs
+        </h3>
+        <ul data-cy="logs" class="mt-4 mb-12 border-t-2"></ul>
+        <label
+          id="newLogLabel"
+          class="text-1xl uppercase tracking-widest font-semibold"
+          >New Log</label
+        >
+        <br />
+        <textarea
+          id="newLogText"
+          style="height: 75px"
+          aria-label="add log textarea"
+          data-cy="log_textarea"
+          class="
+            bg-slate-500
+            focus:outline-0
+            w-full
+            border-y-2
+            my-4
+            py-4
+            h-36
+            font-sans
+            tracking-wider
+          "
+          placeholder="Completed..."
+        ></textarea>
+        <br />
+        <button
+          type="submit"
+          data-cy="add_log_btn"
+          class="
+            border-2
+            py-2
+            px-4
+            rounded
+            disabled:opacity-25
+            uppercase
+            tracking-widest
+            text-lg
+          "
+        >
+          Add Log
+        </button>
+      </div>
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- VANILLA PRACTICUM TODOS -->
+<!-- DONE: move all TODOs that done above to down below here and change the label to DONE:. -->
+<!-- DONE: set the lang attribute to American English -->
+<!-- DONE: set the characterset to utf8 -->
+<!-- DONE: temporarily use stackoverflow's favicon. "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"-->
+<!-- DONE: Load your CSS file -->
+<!-- DONE: The following options are currently static values to show you sample data.  -->
+<!-- AJAX to replace them with dynamic data from GET https://json-server-ft3qa5--3000.local.webcontainer.io/api/v1/courses -->
+<!-- NOTE: all AJAX in this project is via fetch -->
+<!-- Use your own unique URL you recorded, not the sample one above. -->
+<!--https://jsonserver24oyti-mvxb--3000.local-credentialless.webcontainer.io/api/v1/courses-->
+<!-- DONE: Don't show the uvu id text input box until a course was selected above. -->
+<!-- DONE: If course ever becomes unselected, don't show the uvu id text input box.-->
+<!-- DONE: write `10234567` as sample data on the input field below  -->
+<!-- DONE: Ensure the character length never exceeds 8 -->
+<!-- DONE: Only numbers, no letters or other characters-->
+<!-- DONE: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
+<!-- DONE: The following options are currently static values to show you an example.  -->
+<!-- You must replace them with dynamic data by ajaxing GET https://json-server-ft3qa5--3000.local.webcontainer.io/logs?courseId=<courseID>&uvuId=<uvuID> -->
+<!-- DONE: Click anywhere on the log to toggle visibility of the log (text only, not the date)-->
+<!-- DONE: Button should be disabled until the logs, if any, are displayed and there's text in the textarea -->
+<!-- DONE: Button should AJAX PUT the textarea value to json-server which will store it-->
+<!-- DONE: Load the JS file -->
+<!-- DONE: add appropriate comments you feel are necessary, if any, for the next coder to understand -->
