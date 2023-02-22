@@ -141,7 +141,7 @@ let $ = (sel) => new jq(sel);
     let date = new Date().toLocaleString();
     axios({
       method: 'post',
-      url: 'https://jsonserver24oyti-mvxb--3000.local-credentialless.webcontainer.io/logs',
+      url: 'http://localhost:3000/logs',
       data: {
         courseId: course,
         uvuId: id,
@@ -283,7 +283,7 @@ async function renderCourseDropDown() {
 async function retrieveLogs(id, course) {
   // Use Axios to retrieve logs from server for the corresponding student and course
   let srvDataLogs = await axios(
-    'https://jsonserver24oyti-mvxb--3000.local-credentialless.webcontainer.io/logs?courseId=' +
+    'http://localhost:3000/logs?courseId=' +
       course +
       '&uvuId=' +
       id
@@ -315,7 +315,7 @@ async function retrieveLogs(id, course) {
 async function retrieveCourses() {
   // Use Axios to retrieve courses from server
   let srvDataCourses = await axios(
-    'https://jsonserver24oyti-mvxb--3000.local-credentialless.webcontainer.io/api/v1/courses'
+    'http://localhost:3000/api/v1/courses'
   );
   // Obtain and return courses in json format
   let courses = await srvDataCourses.data;
