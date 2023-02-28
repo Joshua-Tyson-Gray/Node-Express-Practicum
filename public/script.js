@@ -239,6 +239,7 @@ async function renderLogs(id, course) {
         $("#newLogText").val(log.text);
         $("#log-id").val(log.id);
         $('#logWrapper > button[type="submit"]').text("Edit Log");
+        $('#newLogLabel').text("Edit Log");
       }
     }
   } catch (error) {
