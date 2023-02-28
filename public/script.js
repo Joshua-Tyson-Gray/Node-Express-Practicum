@@ -76,6 +76,14 @@ class jq {
   toggle() {
     this.els.forEach((el) => (el.hidden = !el.hidden));
   }
+  text(txt){
+    if (arguments.length === 0){
+      // Getter
+      return this.els[0].innerText;
+    }
+    // Setter
+    this.els.forEach((el) => (el.innerText = txt));
+  }
 }
 let $ = (sel) => new jq(sel);
 
@@ -139,17 +147,31 @@ let $ = (sel) => new jq(sel);
     let id = $('#uvuId').val();
     let course = $('#course').val();
     let date = new Date().toLocaleString();
-    axios({
-      method: 'post',
-      url: 'http://localhost:3000/logs',
-      data: {
-        courseId: course,
-        uvuId: id,
-        text: log,
-        date: date,
-        id: generateId(),
-      },
-    });
+    if(event.currentTarget.innerHTML == "Edit Log"){
+      axios({
+        method: 'put',
+        url: `http://localhost:3000/logs/${$("#log-id").val()}`,
+        data: {
+          courseId: course,
+          uvuId: id,
+          text: log,
+          date: date,
+          id: $("#log-id").val(),
+        },
+      });
+    }else{
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/logs',
+        data: {
+          courseId: course,
+          uvuId: id,
+          text: log,
+          date: date,
+          id: generateId(),
+        },
+      });
+    }
     updateLogRender();
     $('#newLogText').val('');
     toggleSubmitBtn(false);
@@ -201,6 +223,7 @@ async function renderLogs(id, course) {
     let logs = await retrieveLogs(id, course);
     for (let log of logs) {
       let logTemplate = getLogTemplate();
+      logTemplate.attr('id', log.id);
       logTemplate.filter('small').html(log.date);
       logTemplate.filter('p').html(log.text);
       $('#logWrapper ul').append(logTemplate);
@@ -210,6 +233,13 @@ async function renderLogs(id, course) {
         let isHidden = event.currentTarget.querySelector('pre').hidden;
         event.currentTarget.querySelector('pre').hidden = !isHidden;
       });
+      let now = new Date();
+      let logDate = new Date(log.date);
+      if(logDate.getDate() == now.getDate() && logDate.getMonth() == now.getMonth() && logDate.getFullYear() == now.getFullYear()){
+        $("#newLogText").val(log.text);
+        $("#log-id").val(log.id);
+        $('#logWrapper > button[type="submit"]').text("Edit Log");
+      }
     }
   } catch (error) {
     // If an HTTP error occures, display the error in the logWrapper container. This will be cleared next time the logs render.
