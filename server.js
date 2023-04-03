@@ -71,10 +71,6 @@ app.post("/logs", async (req, res) => {
         let logEntry = new LogEntry(newLog);
         // Save log to the database
         logEntry = await logEntry.save();
-        res.status(200).json({
-            status:200,
-            data: logEntry
-        });
     }catch(err){
         res.status(400).json({
             status: 400,
@@ -96,10 +92,6 @@ app.put("/logs/:id", async (req, res) => {
                 data: logEntry
             });
         };
-        res.status(400).json({
-            status: 400,
-            message: err.message
-        });
     }catch(err){
         res.status(400).json({
             status: 400,
